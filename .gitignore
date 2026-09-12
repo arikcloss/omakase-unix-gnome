@@ -1,0 +1,11 @@
+# local personal backups — never commit (contain machine-specific dconf/state)
+backups/
+*.tar.gz
+*.tgz
+
+# editor / OS noise
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
