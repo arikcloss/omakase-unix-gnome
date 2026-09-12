@@ -27,6 +27,9 @@ ASSET_ASCII="$SCRIPT_DIR/assets/ascii-text.txt"
 [ -f "$ASSET_ASCII" ] || ASSET_ASCII="$SCRIPT_DIR/ascii-text.txt"
 ASSET_WOLF="$SCRIPT_DIR/assets/unix_wolf.jpg"
 [ -f "$ASSET_WOLF" ] || ASSET_WOLF="$SCRIPT_DIR/unix_wolf.jpg"
+ASSET_GRUB_WOLF="$SCRIPT_DIR/assets/grub_unix_wolf.jpg"
+[ -f "$ASSET_GRUB_WOLF" ] || ASSET_GRUB_WOLF="$SCRIPT_DIR/grub_unix_wolf.jpg"
+[ -f "$ASSET_GRUB_WOLF" ] || ASSET_GRUB_WOLF="$ASSET_WOLF"
 
 declare -A DO=(
   [tools]=1 [fonts]=1 [themes]=1 [extensions]=1
@@ -944,10 +947,12 @@ GB_SVC
   else
     info "  = tela GRUB theme"
   fi
-  if [ -f "$ASSET_WOLF" ] && [ -f /boot/grub2/themes/tela/background.jpg ]; then
-    sudo convert "$ASSET_WOLF" -resize "1920x1080^" -gravity center -extent 1920x1080 /tmp/etf-grub-bg.jpg 2>/dev/null \
+  GRUB_BG_SRC="$ASSET_GRUB_WOLF"
+  [ -f "$GRUB_BG_SRC" ] || GRUB_BG_SRC="$ASSET_WOLF"
+  if [ -f "$GRUB_BG_SRC" ] && [ -f /boot/grub2/themes/tela/background.jpg ]; then
+    sudo convert "$GRUB_BG_SRC" -resize "1920x1080^" -gravity center -extent 1920x1080 -colorspace sRGB -strip -interlace none /tmp/etf-grub-bg.jpg 2>/dev/null \
       && sudo cp /tmp/etf-grub-bg.jpg /boot/grub2/themes/tela/background.jpg \
-      && info "  + wolf GRUB background" || warn "  GRUB background conversion failed"
+      && info "  + GRUB background ($(basename "$GRUB_BG_SRC"))" || warn "  GRUB background conversion failed"
     rm -f /tmp/etf-grub-bg.jpg
   fi
 

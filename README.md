@@ -70,8 +70,9 @@ back to **dnf**.
 
 ### Themes & look
 Graphite-Dark (black + float, 10px rounds, libadwaita-linked), Tela-circle-black
-icons, Graphite-Dark cursors, JetBrainsMono Nerd Font, and the wolf wallpaper for
-both the desktop and the GRUB background.
+icons, Graphite-Dark cursors, JetBrainsMono Nerd Font, and the wolf wallpaper
+for the desktop (`unix_wolf.jpg`) plus a GRUB-optimized baseline JPEG
+(`grub_unix_wolf.jpg`) for the boot menu background.
 
 ### GNOME extensions (GNOME 48/50)
 | Extension                   | Effect                                        |
@@ -134,7 +135,10 @@ Drop your own files into `assets/` and re-run the installer:
 
 - `assets/ascii-text.txt` → automatically scaled and two-tone shaded into the
   fastfetch logo (a fallback logo is used if missing).
-- `assets/unix_wolf.jpg` → desktop wallpaper **and** GRUB background.
+- `assets/unix_wolf.jpg` → desktop wallpaper.
+- `assets/grub_unix_wolf.jpg` → GRUB background. Full-HD sized and kept a
+  **baseline (non-progressive) JPEG** so GRUB's decoder renders it reliably;
+  falls back to `unix_wolf.jpg` (converted on the fly) if absent.
 
 ## Safety
 
@@ -150,9 +154,10 @@ Drop your own files into `assets/` and re-run the installer:
 omakase-unix-gnome/
 ├── install.sh           # the whole installer (self-contained, idempotent)
 ├── assets/
-│   ├── ascii-text.txt   # your ASCII art -> fastfetch logo
-│   ├── ascii-art.txt    # earlier art source (legacy)
-│   └── unix_wolf.jpg    # wallpaper + GRUB background
+│   ├── unix_wolf.jpg        # wallpaper
+│   ├── grub_unix_wolf.jpg   # GRUB background (baseline JPEG, full-HD)
+│   ├── ascii-text.txt       # your ASCII art -> fastfetch logo
+│   └── ascii-art.txt        # earlier art source (legacy)
 └── backups/             # local personal backups (gitignored)
 ```
 
